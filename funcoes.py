@@ -22,3 +22,78 @@ def calcula_pontos_regra_simples(dados):
         if 1 <= d <= 6:
             pontos[d] += d
     return pontos
+
+def calcula_pontos_soma(dados):
+    total = 0
+    for d in dados:
+        total += d
+    return total
+
+def calcula_pontos_sequencia_baixa(dados):
+    conjunto = set(dados)
+    sequencias_validas = [
+        {1, 2, 3, 4},
+        {2, 3, 4, 5},
+        {3, 4, 5, 6}
+    ]
+    for seq in sequencias_validas:
+        if seq.issubset(conjunto):
+            return 15
+    return 0
+
+def calcula_pontos_sequencia_alta(dados):
+    conjunto = set(dados)
+    sequencias_validas = [
+        {1, 2, 3, 4, 5},
+        {2, 3, 4, 5, 6},
+    ]
+    for seq in sequencias_validas:
+        if seq.issubset(conjunto):
+            return 30
+    return 0
+
+def calcula_pontos_full_house(dados):
+    contagem = {}
+    for d in dados:
+        if d in contagem:
+            contagem[d] += 1
+        else:
+            contagem[d] = 1
+
+    valores = list(contagem.values())
+    if sorted(valores) == [2, 3]:
+        total = 0
+        for d in dados:
+            total += d
+        return total
+    else:
+        return 0
+
+def calcula_pontos_quadra(dados):
+    contagem = {}
+    for d in dados:
+        if d in contagem:
+            contagem[d] += 1
+        else:
+            contagem[d] = 1
+
+    for quantidade in contagem.values():
+        if quantidade >= 4:
+            total = 0
+            for d in dados:
+                total += d
+            return total
+    return 0
+
+def calcula_pontos_quina(dados):
+    contagem = {}
+    for d in dados:
+        if d in contagem:
+            contagem[d] += 1
+        else:
+            contagem[d] = 1
+
+    for quantidade in contagem.values():
+        if quantidade >= 5:
+            return 50
+    return 0
